@@ -1,0 +1,105 @@
+/* ══════════════════════════════════════════
+   landing-page-common.css
+   Shared styles: Landing Page + Privacy Policy
+   ══════════════════════════════════════════ */
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --navy:#1e3a5f;
+  --navy2:#2a4f7a;
+  --navy3:#0e2040;
+  --blue:#378add;
+  --blue2:#5ba0e8;
+  --blue3:#ddeeff;
+  --blue4:#e8f3ff;
+  --text:#0e2040;
+  --muted:#5a7499;
+  --muted2:#8aaac8;
+  --surface:#ffffff;
+  --bg:#f0f4ff;
+  --border:#c5d4ec;
+  --success:#1a8c5e;
+  --radius:14px;
+}
+
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--text);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  height:64px;display:flex;align-items:center;
+  padding:0 48px;gap:32px;
+}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo{width:36px;height:36px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.nav-logo svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;}
+.nav-brand-name{font-family:'Cabinet Grotesk',sans-serif;font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-0.5px;}
+.nav-brand-name span{color:var(--blue);}
+.nav-links{display:flex;gap:20px;margin-left:auto;align-items:center;}
+.nav-link{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.nav-link:hover{color:var(--navy);}
+.btn-login{padding:8px 20px;border-radius:8px;font-size:14px;font-weight:600;color:var(--navy);border:1.5px solid var(--border);background:transparent;cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.btn-login:hover{border-color:var(--blue);color:var(--blue);}
+.btn-signup-nav{padding:8px 20px;border-radius:8px;font-size:14px;font-weight:700;color:#fff;border:none;background:var(--navy);cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.btn-signup-nav:hover{background:var(--navy2);}
+/* Privacy page back link */
+.nav-back{margin-left:auto;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.15s;}
+.nav-back:hover{color:var(--navy);}
+
+/* ── FOOTER ── */
+footer{background:var(--navy3);border-top:1px solid rgba(255,255,255,0.08);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-brand-name{font-family:'Cabinet Grotesk',sans-serif;font-size:18px;font-weight:900;color:#fff;}
+.footer-brand-name span{color:var(--blue);}
+.footer-links{display:flex;gap:24px;}
+.footer-link{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:#fff;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(14,32,64,0.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:#fff;border-radius:20px;padding:40px;width:420px;border:1px solid var(--border);box-shadow:0 24px 80px rgba(30,58,95,0.2);animation:slideUp 0.25s ease both;position:relative;}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+.modal-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+.modal-logo-icon{width:36px;height:36px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.modal-logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;}
+.modal-logo-name{font-family:'Cabinet Grotesk',sans-serif;font-size:18px;font-weight:800;color:var(--navy);}
+.modal-logo-name span{color:var(--blue);}
+.modal-tabs{display:flex;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:28px;gap:4px;}
+.modal-tab{flex:1;padding:8px;border-radius:7px;border:none;background:none;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.modal-tab.active{background:#fff;color:var(--navy);box-shadow:0 1px 4px rgba(30,58,95,0.1);}
+.form-group{margin-bottom:16px;}
+.form-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;}
+.form-input{width:100%;padding:11px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;color:var(--text);outline:none;transition:border-color 0.15s;}
+.form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(55,138,221,0.1);}
+.btn-modal-primary{width:100%;padding:13px;border-radius:10px;background:var(--navy);color:#fff;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.15s;margin-top:8px;}
+.btn-modal-primary:hover{background:var(--navy2);}
+.modal-divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
+.modal-divider-line{flex:1;height:1px;background:var(--border);}
+.modal-divider-text{font-size:12px;color:var(--muted2);font-weight:500;}
+.btn-google{width:100%;padding:11px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:10px;transition:border-color 0.15s;}
+.btn-google:hover{border-color:var(--blue);}
+.modal-close-btn{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);font-size:16px;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;}
+.modal-close-btn:hover{background:var(--border);}
+.modal-panel{display:none;}
+.modal-panel.active{display:block;}
+
+/* ── SHARED SECTION UTILITIES ── */
+.section-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue3);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.section-badge-text{font-size:12px;font-weight:700;color:#185FA5;letter-spacing:0.5px;text-transform:uppercase;}
+.section-h2{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(30px,4vw,46px);font-weight:900;color:var(--text);letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px;}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:540px;margin:0 auto;}
+.section-center{text-align:center;margin-bottom:52px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  footer{flex-direction:column;text-align:center;padding:24px;}
+  .footer-links{flex-wrap:wrap;justify-content:center;}
+  .modal-box{width:90%;padding:28px 20px;}
+}

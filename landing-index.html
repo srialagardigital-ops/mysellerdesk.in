@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MySellerDesk — Instagram Sellers CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="landing-page-common.css">
+<style>
+/* ── LANDING PAGE SPECIFIC STYLES ── */
+
+/* ── SECTION 1: HERO ── */
+.hero{
+  min-height:100vh;
+  background:var(--navy3);
+  display:flex;align-items:center;justify-content:center;
+  padding:120px 48px 80px;
+  position:relative;overflow:hidden;
+  text-align:center;flex-direction:column;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(55,138,221,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.06) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.hero-glow{
+  position:absolute;top:10%;left:50%;transform:translateX(-50%);
+  width:700px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(55,138,221,0.2) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;max-width:700px;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(55,138,221,0.15);border:1px solid rgba(55,138,221,0.3);
+  border-radius:100px;padding:6px 18px;margin-bottom:28px;
+}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#5ba0e8;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.hero-badge-text{font-size:12px;font-weight:600;color:#7ec4f5;letter-spacing:0.5px;}
+.hero-h1{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:clamp(44px,6vw,72px);
+  font-weight:900;
+  color:#fff;
+  line-height:1.05;
+  letter-spacing:-2px;
+  margin-bottom:20px;
+}
+.hero-h1 .accent{color:var(--blue2);}
+.hero-sub{
+  font-size:19px;line-height:1.7;color:rgba(255,255,255,0.55);
+  margin-bottom:40px;max-width:540px;margin-left:auto;margin-right:auto;
+}
+.hero-sub strong{color:rgba(255,255,255,0.9);font-weight:600;}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:48px;}
+.btn-hero-primary{
+  padding:16px 36px;border-radius:12px;
+  font-size:16px;font-weight:700;color:#fff;
+  background:var(--blue);border:none;cursor:pointer;
+  font-family:inherit;transition:all 0.2s;
+  display:flex;align-items:center;gap:8px;
+}
+.btn-hero-primary:hover{background:var(--blue2);transform:translateY(-1px);}
+.btn-hero-sec{
+  padding:16px 28px;border-radius:12px;
+  font-size:15px;font-weight:600;color:rgba(255,255,255,0.7);
+  background:transparent;border:1.5px solid rgba(255,255,255,0.15);
+  cursor:pointer;font-family:inherit;transition:all 0.2s;
+}
+.btn-hero-sec:hover{border-color:rgba(255,255,255,0.35);color:#fff;}
+
+
+/* Mock dashboard below hero headline */
+.hero-mock-strip{
+  margin-top:56px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:16px;padding:20px 24px;
+  display:flex;gap:24px;justify-content:center;align-items:center;
+  flex-wrap:wrap;
+}
+.mock-stat-mini{text-align:center;}
+.mock-stat-mini .val{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#fff;}
+.mock-stat-mini .lbl{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;}
+.mock-divider{width:1px;height:40px;background:rgba(255,255,255,0.1);}
+
+/* ── SECTION 2: FEATURES ── */
+.features-section{padding:90px 48px;background:var(--bg);}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:0 auto;}
+.feature-card{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:var(--radius);padding:28px 24px;
+  transition:all 0.2s;
+}
+.feature-card:hover{border-color:var(--blue);background:var(--blue4);transform:translateY(-2px);}
+.feature-icon{font-size:32px;margin-bottom:12px;display:block;}
+.feature-h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.feature-p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── SECTION 3: HOW IT WORKS ── */
+.how-section{padding:90px 48px;background:var(--surface);}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative;max-width:900px;margin-left:auto;margin-right:auto;}
+.how-steps::before{
+  content:'';position:absolute;top:28px;left:12%;right:12%;height:2px;
+  background:linear-gradient(90deg,var(--blue3),var(--blue),var(--blue3));
+  border-radius:1px;z-index:0;
+}
+.how-step{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;padding:0 16px;}
+.how-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--navy);border:4px solid var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cabinet Grotesk',sans-serif;font-size:20px;font-weight:900;color:#fff;
+  margin-bottom:20px;
+}
+.how-step.hi .how-num{background:var(--blue);}
+.how-h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.how-p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── SECTION 4: TESTIMONIALS + PRICING ── */
+.social-proof-section{padding:90px 48px;background:var(--bg);}
+.testi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:0 auto 64px;}
+.testi-card{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+}
+.testi-stars{font-size:14px;margin-bottom:12px;}
+.testi-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:16px;font-style:italic;}
+.testi-name{font-size:13px;font-weight:700;color:var(--text);}
+.testi-handle{font-size:12px;color:var(--blue);font-weight:500;}
+.testi-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.testi-author{display:flex;align-items:center;gap:10px;}
+
+.pricing-title{text-align:center;margin-bottom:40px;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:800px;margin:0 auto;}
+.price-card{
+  background:var(--surface);border:2px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  transition:all 0.2s;
+}
+.price-card.featured{background:var(--navy);border-color:var(--blue);position:relative;}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap;}
+.price-name{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.price-card.featured .price-name{color:rgba(255,255,255,0.5);}
+.price-amount{font-family:'Cabinet Grotesk',sans-serif;font-size:38px;font-weight:900;color:var(--text);letter-spacing:-2px;margin-bottom:4px;}
+.price-card.featured .price-amount{color:#5ba0e8;}
+.price-period{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.price-card.featured .price-period{color:rgba(255,255,255,0.4);}
+.price-features{display:flex;flex-direction:column;gap:9px;margin-bottom:24px;}
+.price-feat{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text);}
+.price-card.featured .price-feat{color:rgba(255,255,255,0.75);}
+.price-tick{color:var(--success);flex-shrink:0;}
+.price-card.featured .price-tick{color:#5ba0e8;}
+.btn-price{width:100%;padding:12px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.btn-price-outline{background:transparent;color:var(--navy);border:2px solid var(--border);}
+.btn-price-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-price-solid{background:var(--blue);color:#fff;border:none;}
+.btn-price-solid:hover{background:var(--blue2);}
+
+/* ── SECTION 5: CTA ── */
+.cta-section{
+  padding:100px 48px;
+  background:var(--navy3);
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(55,138,221,0.2) 0%,transparent 70%);pointer-events:none;}
+.cta-h2{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;position:relative;z-index:2;}
+.cta-h2 span{color:var(--blue2);}
+.cta-sub{font-size:17px;color:rgba(255,255,255,0.5);margin-bottom:36px;position:relative;z-index:2;}
+.cta-btns{display:flex;gap:14px;justify-content:center;position:relative;z-index:2;flex-wrap:wrap;}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.hero-content > *{animation:fadeInUp 0.6s ease both;}
+.hero-badge{animation-delay:0.1s;}
+.hero-h1{animation-delay:0.2s;}
+.hero-sub{animation-delay:0.3s;}
+.hero-cta{animation-delay:0.4s;}
+.hero-mock-strip{animation:fadeInUp 0.8s 0.5s ease both;}
+
+@media(max-width:768px){
+  .hero{padding:100px 24px 60px;}
+  .features-section,.how-section,.social-proof-section,.cta-section{padding:60px 24px;}
+  .features-grid{grid-template-columns:1fr 1fr;}
+  .how-steps{grid-template-columns:repeat(2,1fr);}
+  .how-steps::before{display:none;}
+  .testi-row,.pricing-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    </div>
+    <span class="nav-brand-name">My Seller<span>Desk</span></span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="#features">Features</a>
+    <a class="nav-link" href="#how">How it works</a>
+    <a class="nav-link" href="#pricing">Pricing</a>
+    <button class="btn-login" onclick="openModal('login')">Log in</button>
+    <button class="btn-signup-nav" onclick="openModal('signup')">Start Free →</button>
+  </div>
+</nav>
+
+<!-- ══ SCROLL 1: HERO ══ -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span class="hero-badge-text">Built for Instagram Sellers</span>
+    </div>
+    <h1 class="hero-h1">
+      Stop Managing Orders<br>in <span class="accent">DMs & Notes</span>
+    </h1>
+    <p class="hero-sub">
+      MySellerDesk — <strong>The CRM built for Instagram sellers.</strong><br>Track orders, print bills, generate shipping labels, and grow — all in one place.
+    </p>
+    <div class="hero-cta">
+      <button class="btn-hero-primary" onclick="openModal('signup')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Get Started Free
+      </button>
+      <button class="btn-hero-sec" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">▶ See How It Works</button>
+    </div>
+
+    <div class="hero-mock-strip">
+      <div class="mock-stat-mini"><div class="val">₹48,290</div><div class="lbl">This Month Revenue</div></div>
+      <div class="mock-divider"></div>
+      <div class="mock-stat-mini"><div class="val">124</div><div class="lbl">Orders Tracked</div></div>
+      <div class="mock-divider"></div>
+      <div class="mock-stat-mini"><div class="val">0</div><div class="lbl">Orders Lost</div></div>
+      <div class="mock-divider"></div>
+      <div class="mock-stat-mini"><div class="val">2 min</div><div class="lbl">Per Order Process Time</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCROLL 2: FEATURES ══ -->
+<section class="features-section" id="features">
+  <div class="section-center">
+    <div class="section-badge"><span class="section-badge-text">Features</span></div>
+    <h2 class="section-h2">Everything Your Business<br>Needs in One Place</h2>
+    <p class="section-sub">Less manual work. More time selling. More revenue.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📦</span>
+      <h4 class="feature-h4">Order Management</h4>
+      <p class="feature-p">Enquiry → Confirm → Pack → Dispatch → Deliver. Every order tracked in one dashboard. Nothing slips through.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🧾</span>
+      <h4 class="feature-h4">Auto Bill Generation</h4>
+      <p class="feature-p">Professional invoices generated instantly — with your shop logo, UPI QR, and product details. No more manual writing.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🏷️</span>
+      <h4 class="feature-h4">A5 Shipping Labels</h4>
+      <p class="feature-p">Print-ready A5 labels with QR code. Correct address, order details — zero wrong deliveries.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💬</span>
+      <h4 class="feature-h4">WhatsApp Messages</h4>
+      <p class="feature-p">Order confirmation, dispatch alert, payment reminder — send pre-written WhatsApp messages in one click.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📈</span>
+      <h4 class="feature-h4">Sales Analytics</h4>
+      <p class="feature-p">Daily revenue, best-selling products, top customers — all in a clear dashboard. Make smarter decisions with real data.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
+      <h4 class="feature-h4">COD Pending Tracker</h4>
+      <p class="feature-p">See exactly who hasn't paid yet. Track all pending COD orders in one place — no more chasing payments manually.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔄</span>
+      <h4 class="feature-h4">Return / RTO Tracker</h4>
+      <p class="feature-p">When courier returns your package, log it instantly. Know your RTO rate and reduce losses over time.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⭐</span>
+      <h4 class="feature-h4">Repeat Customer Alert</h4>
+      <p class="feature-p">MySellerDesk automatically flags customers who've ordered before — so you can treat your loyal buyers better.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCROLL 3: HOW IT WORKS ══ -->
+<section class="how-section" id="how">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="section-center">
+      <div class="section-badge"><span class="section-badge-text">How It Works</span></div>
+      <h2 class="section-h2">4 Simple Steps. That's It.</h2>
+      <p class="section-sub">A DM comes in, it's processed in 2 minutes, and your customer is happy.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step hi">
+        <div class="how-num">1</div>
+        <h4 class="how-h4">Receive DM Order</h4>
+        <p class="how-p">When a customer DMs you on Instagram, log the order in MySellerDesk in under 30 seconds.</p>
+      </div>
+      <div class="how-step hi">
+        <div class="how-num">2</div>
+        <h4 class="how-h4">Confirm & Bill</h4>
+        <p class="how-p">Confirm the address and amount — a professional bill is auto-generated and ready to send on WhatsApp.</p>
+      </div>
+      <div class="how-step hi">
+        <div class="how-num">3</div>
+        <h4 class="how-h4">Pack & Print Label</h4>
+        <p class="how-p">Your A5 shipping label is instantly ready to print. No handwriting. No wrong addresses.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <h4 class="how-h4">Track & Grow</h4>
+        <p class="how-p">Track delivery status end-to-end and watch your business growth in the analytics dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCROLL 4: TESTIMONIALS + PRICING ══ -->
+<section class="social-proof-section" id="pricing">
+  <!-- Testimonials -->
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="section-center" style="margin-bottom:36px;">
+      <div class="section-badge"><span class="section-badge-text">Real Sellers</span></div>
+      <h2 class="section-h2">What Sellers Are Saying</h2>
+    </div>
+    <div class="testi-row">
+      <div class="testi-card">
+        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testi-text">"No more missed orders. Bill + WhatsApp done in 2 minutes. Used to take me over an hour!"</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:#378add;">PK</div>
+          <div><div class="testi-name">Priya Krishnan</div><div class="testi-handle">@priya.jewels · Chennai</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testi-text">"No more Excel chaos. I open the dashboard and instantly see today's revenue and pending orders. Feels so professional!"</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:#1a8c5e;">SK</div>
+          <div><div class="testi-name">Sowmya Karthik</div><div class="testi-handle">@sowmya.sarees · Coimbatore</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testi-text">"No more handwritten labels! Scan the QR and all details appear. Customers trust me more and returns have dropped!"</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:#5047a8;">MA</div>
+          <div><div class="testi-name">Meena Arunachalam</div><div class="testi-handle">@meena.crochet · Madurai</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="pricing-title" style="margin-top:64px;">
+      <div class="section-badge" style="margin:0 auto 16px;"><span class="section-badge-text">Pricing</span></div>
+      <h2 class="section-h2">Simple pricing. No hidden charges.</h2>
+      <p class="section-sub">Start free, upgrade when you're ready. No hidden charges.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Free Trial</div>
+        <div class="price-amount">₹0</div>
+        <div class="price-period">30 days free · no credit card</div>
+        <div class="price-features">
+          <div class="price-feat"><span class="price-tick">✓</span> Unlimited orders for 30 days</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Order management</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Customer database</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Basic bill generation</div>
+          <div class="price-feat" style="opacity:0.4;"><span>✗</span> Shipping labels</div>
+          <div class="price-feat" style="opacity:0.4;"><span>✗</span> PDF download</div>
+        </div>
+        <button class="btn-price btn-price-outline" onclick="openModal('signup')">Start Free →</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-name">Pro</div>
+        <div class="price-amount">₹199</div>
+        <div class="price-period">per month · cancel anytime</div>
+        <div class="price-features">
+          <div class="price-feat"><span class="price-tick">✓</span> <strong style="color:#fff;">Unlimited</strong> orders</div>
+          <div class="price-feat"><span class="price-tick">✓</span> A5 Shipping labels + QR</div>
+          <div class="price-feat"><span class="price-tick">✓</span> PDF download & print</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Bill — no watermark</div>
+          <div class="price-feat"><span class="price-tick">✓</span> WhatsApp messaging</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Priority support</div>
+        </div>
+        <button class="btn-price btn-price-solid" onclick="openModal('signup')">⚡ Start Pro →</button>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Pro Plus</div>
+        <div class="price-amount">₹1,999</div>
+        <div class="price-period">per year · save ₹389</div>
+        <div class="price-features">
+          <div class="price-feat"><span class="price-tick">✓</span> Everything in Pro</div>
+          <div class="price-feat"><span class="price-tick">✓</span> 1 full year access</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Best value — ₹167/mo</div>
+          <div class="price-feat"><span class="price-tick">✓</span> VIP priority support</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Early access to features</div>
+        </div>
+        <button class="btn-price btn-price-outline" onclick="openModal('signup')">👑 Get Pro Plus →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCROLL 5: CTA ══ -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <h2 class="cta-h2">Selling on Instagram?<br><span>Try MySellerDesk Today</span></h2>
+  <p class="cta-sub">Start free. No credit card needed. Ready in 2 minutes.</p>
+  <div class="cta-btns">
+    <button class="btn-hero-primary" onclick="openModal('signup')">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Get Started Free
+    </button>
+    <button class="btn-hero-sec" onclick="openModal('login')">Already have account? Log in</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand-name">My Seller<span>Desk</span></div>
+  <div class="footer-links">
+    <a class="footer-link" href="#features">Features</a>
+    <a class="footer-link" href="#how">How it works</a>
+    <a class="footer-link" href="#pricing">Pricing</a>
+    <a class="footer-link" href="landing-page-privacy.html">Privacy Policy</a>
+    <a class="footer-link" href="landing-page-terms.html">Terms</a>
+  </div>
+  <div class="footer-copy">© 2025 MySellerDesk · Made with ❤️ for Indian sellers</div>
+</footer>
+
+<!-- LOGIN / SIGNUP MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    <div class="modal-logo">
+      <div class="modal-logo-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <span class="modal-logo-name">My Seller<span>Desk</span></span>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tab-login" onclick="switchTab('login')">Log in</button>
+      <button class="modal-tab" id="tab-signup" onclick="switchTab('signup')">Sign up</button>
+    </div>
+    <div class="modal-panel active" id="panel-login">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="you@example.com" id="login-email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" placeholder="••••••••" id="login-pass">
+      </div>
+      <div style="text-align:right;margin-top:-8px;margin-bottom:16px;">
+        <a href="#" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:600;">Forgot password?</a>
+      </div>
+      <div id="login-error" style="display:none;background:#fff0f0;border:1.5px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:13px;color:#c03030;margin-bottom:12px;">Invalid email or password. Please try again.</div>
+      <button class="btn-modal-primary" onclick="handleLogin()">Log in to MySellerDesk</button>
+      <div class="modal-divider"><div class="modal-divider-line"></div><div class="modal-divider-text">or</div><div class="modal-divider-line"></div></div>
+      <button class="btn-google">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Continue with Google
+      </button>
+    </div>
+    <div class="modal-panel" id="panel-signup">
+      <div class="form-group">
+        <label class="form-label">Shop Name</label>
+        <input class="form-input" type="text" placeholder="Kavya Crafts" id="signup-shop">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="you@example.com" id="signup-email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" placeholder="Min 8 characters" id="signup-pass">
+      </div>
+      <button class="btn-modal-primary" onclick="handleSignup()">Create Free Account →</button>
+      <div class="modal-divider"><div class="modal-divider-line"></div><div class="modal-divider-text">or</div><div class="modal-divider-line"></div></div>
+      <button class="btn-google">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Sign up with Google
+      </button>
+      <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6;">By signing up you agree to our <a href="landing-page-terms.html" style="color:var(--blue);text-decoration:none;">Terms</a> and <a href="landing-page-privacy.html" style="color:var(--blue);text-decoration:none;">Privacy Policy</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="landing-page-config.js"></script>
+<script src="landing-page-common.js"></script>
+</body>
+</html>

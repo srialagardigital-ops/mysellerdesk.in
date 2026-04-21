@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use — MySellerDesk</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#1e3a5f;--navy2:#2a4f7a;--navy3:#0e2040;
+  --blue:#378add;--blue2:#5ba0e8;
+  --text:#0e2040;--muted:#5a7499;
+  --surface:#fff;--bg:#f0f4ff;--border:#c5d4ec;
+  --success:#1a8c5e;--radius:14px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 48px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo{width:36px;height:36px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.nav-logo svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;}
+.nav-brand-name{font-family:'Cabinet Grotesk',sans-serif;font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-0.5px;}
+.nav-brand-name span{color:var(--blue);}
+.nav-back{margin-left:auto;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.nav-back:hover{color:var(--navy);}
+
+/* HERO */
+.hero{background:var(--navy3);padding:120px 48px 64px;text-align:center;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(55,138,221,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.06) 1px,transparent 1px);background-size:48px 48px;}
+.hero-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(55,138,221,0.18) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;z-index:2;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(55,138,221,0.15);border:1px solid rgba(55,138,221,0.3);border-radius:100px;padding:6px 18px;margin-bottom:20px;}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#5ba0e8;}
+.hero-badge-text{font-size:12px;font-weight:600;color:#7ec4f5;letter-spacing:0.5px;text-transform:uppercase;}
+.hero-h1{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:12px;}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.45);max-width:440px;margin:0 auto;}
+.hero-date{font-size:12px;color:rgba(255,255,255,0.25);margin-top:12px;}
+
+/* CONTENT */
+.content{max-width:680px;margin:64px auto 96px;padding:0 32px;}
+.section{margin-bottom:52px;}
+.section-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.section-title{font-family:'Cabinet Grotesk',sans-serif;font-size:22px;font-weight:900;color:var(--text);letter-spacing:-0.5px;margin-bottom:16px;}
+.divider{height:1.5px;background:linear-gradient(90deg,var(--border),transparent);margin-bottom:20px;border-radius:1px;}
+.body-text{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:12px;}
+
+/* LIST */
+.item-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);line-height:1.7;}
+.tick{width:20px;height:20px;border-radius:5px;background:rgba(26,140,94,0.12);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--success);font-weight:800;flex-shrink:0;margin-top:2px;}
+.cross{width:20px;height:20px;border-radius:5px;background:rgba(192,48,48,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;color:#c03030;font-weight:800;flex-shrink:0;margin-top:2px;}
+.item strong{color:var(--text);}
+
+/* PLANS */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+.plan{border:1.5px solid var(--border);border-radius:12px;padding:18px 16px;background:var(--bg);}
+.plan.featured{border-color:var(--blue);background:var(--navy3);}
+.plan-name{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.plan.featured .plan-name{color:rgba(255,255,255,0.45);}
+.plan-price{font-family:'Cabinet Grotesk',sans-serif;font-size:26px;font-weight:900;color:var(--text);letter-spacing:-1px;margin-bottom:2px;}
+.plan.featured .plan-price{color:var(--blue2);}
+.plan-period{font-size:11px;color:var(--muted);margin-bottom:10px;}
+.plan.featured .plan-period{color:rgba(255,255,255,0.35);}
+.plan-note{font-size:12px;color:var(--muted);line-height:1.5;}
+.plan.featured .plan-note{color:rgba(255,255,255,0.55);}
+
+/* REFUND BADGE */
+.refund-badge{display:flex;align-items:flex-start;gap:14px;background:rgba(26,140,94,0.05);border:1.5px solid rgba(26,140,94,0.25);border-radius:12px;padding:18px 20px;margin-top:16px;}
+.refund-icon{font-size:22px;flex-shrink:0;}
+.refund-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.refund-text{font-size:13px;color:var(--muted);line-height:1.65;}
+
+/* CONTACT */
+.contact-box{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:22px;margin-top:12px;}
+.contact-email{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:4px;}
+.contact-sub{font-size:13px;color:var(--muted);}
+
+/* FOOTER */
+footer{background:var(--navy3);border-top:1px solid rgba(255,255,255,0.08);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-brand{font-family:'Cabinet Grotesk',sans-serif;font-size:17px;font-weight:900;color:#fff;}
+.footer-brand span{color:var(--blue);}
+.footer-links{display:flex;gap:20px;}
+.footer-link{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:#fff;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .hero{padding:100px 24px 52px;}
+  .content{padding:0 20px;margin-top:40px;}
+  .plans{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;padding:20px;}
+  .footer-links{flex-wrap:wrap;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    </div>
+    <span class="nav-brand-name">My Seller<span>Desk</span></span>
+  </a>
+  <a class="nav-back" href="index.html">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span class="hero-badge-text">Short &amp; Simple</span>
+    </div>
+    <h1 class="hero-h1">Terms of Use</h1>
+    <p class="hero-sub">No legal jargon. Just plain language about how MySellerDesk works.</p>
+    <p class="hero-date">Last updated: June 1, 2025</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- 01 -->
+  <div class="section">
+    <div class="section-label">01</div>
+    <h2 class="section-title">🙋 Who Can Use MySellerDesk</h2>
+    <div class="divider"></div>
+    <p class="body-text">MySellerDesk is for individual sellers and small businesses in India who sell on Instagram or other social platforms. You must be 18 or older to sign up. By using the app, you agree to these terms.</p>
+  </div>
+
+  <!-- 02 -->
+  <div class="section">
+    <div class="section-label">02</div>
+    <h2 class="section-title">💳 Plans &amp; Pricing</h2>
+    <div class="divider"></div>
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Free Trial</div>
+        <div class="plan-price">₹0</div>
+        <div class="plan-period">30 days · no card needed</div>
+        <div class="plan-note">Order management, customer DB, basic billing.</div>
+      </div>
+      <div class="plan featured">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">₹199</div>
+        <div class="plan-period">per month</div>
+        <div class="plan-note">Shipping labels, PDF, WhatsApp, no watermark.</div>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Pro Plus</div>
+        <div class="plan-price">₹1,999</div>
+        <div class="plan-period">per year · save ₹389</div>
+        <div class="plan-note">Everything in Pro for a full year. ₹167/mo effective.</div>
+      </div>
+    </div>
+    <div class="refund-badge">
+      <span class="refund-icon">✅</span>
+      <div>
+        <div class="refund-title">7-Day Refund — No Questions Asked</div>
+        <div class="refund-text">Not happy within 7 days of paying? Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef9c9a9f9f809d9baf9c8a83838a9d8b8a9c84c18681">[email&#160;protected]</a> and we'll refund in full. After 7 days, refunds are not available for the current billing period.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="section">
+    <div class="section-label">03</div>
+    <h2 class="section-title">📦 What MySellerDesk Is (and Isn't)</h2>
+    <div class="divider"></div>
+    <ul class="item-list">
+      <li class="item"><span class="tick">✓</span><span>A tool to manage your orders, bills, shipping labels, and analytics.</span></li>
+      <li class="item"><span class="tick">✓</span><span>WhatsApp message templates — sent from <strong>your own WhatsApp</strong>. We never access your account.</span></li>
+      <li class="item"><span class="cross">✗</span><span><strong>Not a courier</strong> — We don't pick up or deliver parcels.</span></li>
+      <li class="item"><span class="cross">✗</span><span><strong>Not a payment gateway</strong> — We don't process money. We only help you track who paid.</span></li>
+      <li class="item"><span class="cross">✗</span><span><strong>No uptime guarantee</strong> — We aim for 99% but occasional maintenance may happen.</span></li>
+    </ul>
+  </div>
+
+  <!-- 04 -->
+  <div class="section">
+    <div class="section-label">04</div>
+    <h2 class="section-title">🚫 Simple Rules</h2>
+    <div class="divider"></div>
+    <p class="body-text">Breaking these may result in your account being suspended without a refund.</p>
+    <ul class="item-list">
+      <li class="item"><span class="cross">✗</span><span>Don't use MySellerDesk for anything illegal under Indian law.</span></li>
+      <li class="item"><span class="cross">✗</span><span>Don't spam or harass customers using the WhatsApp feature.</span></li>
+      <li class="item"><span class="cross">✗</span><span>Don't share, resell, or let others use your account.</span></li>
+      <li class="item"><span class="cross">✗</span><span>Don't try to hack or reverse-engineer the platform.</span></li>
+      <li class="item"><span class="tick">✓</span><span>Your data is yours — export anytime from Settings. Request deletion anytime; we'll process within 30 days.</span></li>
+    </ul>
+  </div>
+
+  <!-- 05 -->
+  <div class="section">
+    <div class="section-label">05</div>
+    <h2 class="section-title">📬 Contact &amp; Jurisdiction</h2>
+    <div class="divider"></div>
+    <p class="body-text">These terms are governed by Indian law. Jurisdiction: Chennai, Tamil Nadu. Questions? We reply within 48 hours.</p>
+    <div class="contact-box">
+      <div class="contact-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="790a0c0909160b0d390a1c15151c0b1d1c0a12571017">[email&#160;protected]</a></div>
+      <div class="contact-sub">MySellerDesk Technologies Pvt. Ltd. · India</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">My Seller<span>Desk</span></div>
+  <div class="footer-links">
+    <a class="footer-link" href="index.html#features">Features</a>
+    <a class="footer-link" href="index.html#pricing">Pricing</a>
+    <a cl

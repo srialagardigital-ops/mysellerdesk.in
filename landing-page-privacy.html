@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — MySellerDesk</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="landing-page-common.css">
+<style>
+/* ── PRIVACY PAGE SPECIFIC STYLES ── */
+
+/* HERO */
+.policy-hero{background:var(--navy3);padding:120px 48px 72px;position:relative;overflow:hidden;text-align:center;}
+.policy-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(55,138,221,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.06) 1px,transparent 1px);background-size:48px 48px;}
+.policy-hero-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(55,138,221,0.18) 0%,transparent 70%);pointer-events:none;}
+.policy-hero-inner{position:relative;z-index:2;}
+.policy-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(55,138,221,0.15);border:1px solid rgba(55,138,221,0.3);border-radius:100px;padding:6px 18px;margin-bottom:24px;}
+.policy-badge-dot{width:7px;height:7px;border-radius:50%;background:#5ba0e8;}
+.policy-badge-text{font-size:12px;font-weight:600;color:#7ec4f5;letter-spacing:0.5px;text-transform:uppercase;}
+.policy-h1{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-2px;line-height:1.05;margin-bottom:16px;}
+.policy-sub{font-size:17px;color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto;line-height:1.7;}
+.policy-updated{font-size:13px;color:rgba(255,255,255,0.3);margin-top:16px;}
+
+/* SUMMARY BOX */
+.summary-wrap{max-width:820px;margin:-36px auto 0;position:relative;z-index:10;padding:0 24px;}
+.summary-box{background:#fff;border:2px solid var(--blue);border-radius:var(--radius);padding:28px 32px;box-shadow:0 8px 40px rgba(30,58,95,0.12);}
+.summary-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+.summary-label::before{content:'⚡';font-size:13px;}
+.summary-points{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.summary-point{display:flex;align-items:flex-start;gap:12px;}
+.summary-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.summary-point-text{font-size:13px;font-weight:700;color:var(--text);line-height:1.5;}
+.summary-point-text span{display:block;font-weight:400;color:var(--muted);margin-top:3px;font-size:12px;}
+
+/* LAYOUT */
+.policy-layout{max-width:760px;margin:72px auto 96px;padding:0 48px;}
+
+/* CONTENT */
+.policy-content{}
+.policy-section{margin-bottom:64px;scroll-margin-top:80px;}
+.section-number{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.section-title{font-family:'Cabinet Grotesk',sans-serif;font-size:26px;font-weight:900;color:var(--text);letter-spacing:-0.8px;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-icon{font-size:24px;}
+.section-divider{height:2px;background:linear-gradient(90deg,var(--border),transparent);margin-bottom:24px;border-radius:1px;}
+.policy-p{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:16px;}
+
+/* HIGHLIGHT CARDS */
+.highlight-card{border-radius:var(--radius);padding:20px 24px;margin:20px 0;display:flex;align-items:flex-start;gap:14px;}
+.highlight-card.promise{border:1.5px solid rgba(26,140,94,0.3);background:rgba(26,140,94,0.04);}
+.highlight-card.info{border:1.5px solid rgba(55,138,221,0.3);background:rgba(55,138,221,0.04);}
+.highlight-card.caution{border:1.5px solid rgba(176,122,16,0.3);background:rgba(176,122,16,0.04);}
+.highlight-emoji{font-size:22px;flex-shrink:0;margin-top:2px;}
+.highlight-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.highlight-text{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* DATA TABLE */
+.data-table{width:100%;border-collapse:collapse;margin:20px 0;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);}
+.data-table th{background:var(--navy);color:#fff;font-size:12px;font-weight:700;text-align:left;padding:13px 16px;letter-spacing:0.3px;}
+.data-table td{padding:12px 16px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);line-height:1.65;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--bg);}
+.data-table td:first-child{font-weight:600;color:var(--text);width:32%;}
+
+/* PROMISE LIST */
+.promise-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin:16px 0;}
+.promise-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--muted);line-height:1.7;}
+.promise-tick{width:22px;height:22px;border-radius:6px;background:rgba(26,140,94,0.12);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px;color:var(--success);font-weight:800;}
+.promise-cross{width:22px;height:22px;border-radius:6px;background:rgba(192,48,48,0.1);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px;color:#c03030;font-weight:800;}
+.promise-num{width:22px;height:22px;border-radius:6px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px;color:#fff;font-weight:800;}
+.promise-item strong{color:var(--text);}
+
+/* RIGHTS GRID */
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+.right-card{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:20px;}
+.right-icon{font-size:22px;margin-bottom:10px;}
+.right-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.right-text{font-size:13px;color:var(--muted);line-height:1.65;}
+
+@media(max-width:768px){
+  .policy-hero{padding:100px 24px 60px;}
+  .summary-wrap{padding:0 16px;}
+  .summary-points{grid-template-columns:1fr;}
+  .policy-layout{padding:0 24px;margin-top:40px;}
+  .rights-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    </div>
+    <span class="nav-brand-name">My Seller<span>Desk</span></span>
+  </a>
+  <a class="nav-back" href="index.html">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="policy-hero">
+  <div class="policy-hero-grid"></div>
+  <div class="policy-hero-glow"></div>
+  <div class="policy-hero-inner">
+    <div class="policy-badge">
+      <span class="policy-badge-dot"></span>
+      <span class="policy-badge-text">We take your data seriously</span>
+    </div>
+    <h1 class="policy-h1">Privacy Policy</h1>
+    <p class="policy-sub">We believe you deserve to know exactly what data we collect, how we use it, and what we will never do with it.</p>
+    <p class="policy-updated">Last updated: June 1, 2025</p>
+  </div>
+</section>
+
+<!-- SUMMARY BOX -->
+<div class="summary-wrap">
+  <div class="summary-box">
+    <div class="summary-label">The Short Version — Plain &amp; Simple</div>
+    <div class="summary-points">
+      <div class="summary-point">
+        <span class="summary-icon">🔒</span>
+        <div class="summary-point-text">Your data belongs to you
+          <span>MySellerDesk never claims ownership of any data you enter.</span>
+        </div>
+      </div>
+      <div class="summary-point">
+        <span class="summary-icon">🚫</span>
+        <div class="summary-point-text">We never sell your data
+          <span>No third parties, no advertisers, no data brokers. Ever.</span>
+        </div>
+      </div>
+      <div class="summary-point">
+        <span class="summary-icon">🗑️</span>
+        <div class="summary-point-text">Delete anytime, no questions asked
+          <span>Close your account and all data is permanently deleted within 30 days.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="policy-layout">
+  <main class="policy-content">
+
+    <!-- 1 -->
+    <section class="policy-section" id="collect">
+      <div class="section-number">Section 01</div>
+      <h2 class="section-title"><span class="section-icon">📋</span> Information We Collect</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">When you use MySellerDesk, we collect certain information to provide and improve our service. Below is a clear, honest breakdown of what we collect, when, and why.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data We Collect</th>
+            <th>When It Is Collected</th>
+            <th>Why We Need It</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Shop name, Email, Password</td>
+            <td>When you create an account</td>
+            <td>To identify and authenticate your account</td>
+          </tr>
+          <tr>
+            <td>Order details, amounts, product info</td>
+            <td>When you log orders in the app</td>
+            <td>To power your order tracking and dashboard</td>
+          </tr>
+          <tr>
+            <td>Customer names, addresses, phone numbers</td>
+            <td>When you add customers or orders</td>
+            <td>To generate shipping labels and invoices</td>
+          </tr>
+          <tr>
+            <td>Payment status (Paid / Pending / COD)</td>
+            <td>When you update an order</td>
+            <td>To track payments and trigger reminders</td>
+          </tr>
+          <tr>
+            <td>Device type, login times, feature usage</td>
+            <td>Automatically while using the app</td>
+            <td>To fix bugs and improve the product</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-card info">
+        <span class="highlight-emoji">ℹ️</span>
+        <div>
+          <div class="highlight-title">What We Do Not Collect</div>
+          <div class="highlight-text">MySellerDesk does not collect your bank account numbers, credit or debit card details, UPI PINs, or any financial credentials. All payment verification happens directly between you and your customer — we are never in that loop.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="policy-section" id="use">
+      <div class="section-number">Section 02</div>
+      <h2 class="section-title"><span class="section-icon">⚙️</span> How We Use Your Information</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">We use the data we collect strictly for the following purposes. Nothing else.</p>
+
+      <ul class="promise-list">
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>To deliver the core service</strong> — Displaying your orders, generating invoices, printing shipping labels, and powering your analytics dashboard all rely on the data you provide.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>To manage your account and security</strong> — Verifying logins, enabling password resets, and detecting suspicious or unauthorized activity.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>To provide customer support</strong> — When you report a problem, we use your account data to understand the issue and resolve it quickly.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>To improve the product</strong> — Aggregated, anonymous usage patterns help us identify what is working and where we can do better. This is never tied to your individual identity.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>To send important notifications</strong> — We may contact you about security alerts, app updates, or changes to this policy. We do not send promotional spam.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 3 -->
+    <section class="policy-section" id="notdo">
+      <div class="section-number">Section 03</div>
+      <h2 class="section-title"><span class="section-icon">🚫</span> What We Will Never Do</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">These are absolute commitments — not disclaimers buried in fine print. We hold ourselves to these standards regardless of business pressures.</p>
+
+      <ul class="promise-list">
+        <li class="promise-item">
+          <span class="promise-cross">✗</span>
+          <span><strong>Sell your data</strong> — We will never sell, rent, or trade your personal information to any third party, advertiser, or data broker. Our business runs on subscription fees, not data monetization.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-cross">✗</span>
+          <span><strong>Use your customers' data for our own purposes</strong> — The names, addresses, and phone numbers you enter belong to your business. We do not use them for marketing, research, or any purpose beyond running your MySellerDesk account.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-cross">✗</span>
+          <span><strong>Share your data without consent</strong> — We do not share your information with any external party without your explicit permission. The only exception is a legally binding court order or regulatory requirement, and we will disclose that to you clearly.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-cross">✗</span>
+          <span><strong>Send you marketing spam</strong> — Your email will never be used for promotional campaigns. We only send transactional and product-critical communications.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-cross">✗</span>
+          <span><strong>Read your Instagram DMs</strong> — MySellerDesk has no access to your Instagram messages or conversations. We only work with order information you manually enter into our platform.</span>
+        </li>
+      </ul>
+
+      <div class="highlight-card promise">
+        <span class="highlight-emoji">🤝</span>
+        <div>
+          <div class="highlight-title">Our Core Promise</div>
+          <div class="highlight-text">MySellerDesk's business model is built entirely on subscriptions — not data. Your data is the means by which we serve you, not a product we profit from. That distinction matters to us, and we intend to keep it.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="policy-section" id="security">
+      <div class="section-number">Section 04</div>
+      <h2 class="section-title"><span class="section-icon">🔐</span> Data Security</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">Protecting your data is not an afterthought — it is built into how MySellerDesk is architected. Here is what we do to keep your information safe.</p>
+
+      <ul class="promise-list">
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>Encryption in Transit</strong> — All data exchanged between your device and our servers is encrypted using HTTPS/TLS. It cannot be intercepted in transit.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>Encryption at Rest</strong> — Data stored on our servers is encrypted at rest. It is never stored in plain text.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>Trusted Cloud Infrastructure</strong> — We host on industry-standard cloud providers with 24/7 monitoring, automated backups, and disaster recovery protocols.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>Hashed Passwords</strong> — Your password is stored as a cryptographic hash. Not even MySellerDesk employees can read your actual password.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>Strict Access Controls</strong> — Only a small number of authorized team members can access user data, only when operationally necessary, and always under a logged audit trail.</span>
+        </li>
+      </ul>
+
+      <div class="highlight-card caution">
+        <span class="highlight-emoji">⚠️</span>
+        <div>
+          <div class="highlight-title">Your Role in Security</div>
+          <div class="highlight-text">No security system is complete without your participation. Please use a strong, unique password, avoid sharing your login credentials, and contact us immediately at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bececcd7c8dfddc7fecddbd2d2dbccdadbcdd590d7d0">[email&#160;protected]</a> if you suspect unauthorized access to your account.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="policy-section" id="whatsapp">
+      <div class="section-number">Section 05</div>
+      <h2 class="section-title"><span class="section-icon">💬</span> WhatsApp Integration</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">MySellerDesk includes a WhatsApp messaging feature. We want to be completely transparent about exactly how it works.</p>
+
+      <ul class="promise-list">
+        <li class="promise-item">
+          <span class="promise-tick">✓</span>
+          <span><strong>We only prepare message templates</strong> — For order confirmations, dispatch alerts, and payment reminders, MySellerDesk pre-fills a message template using your order data. The actual sending happens through your own WhatsApp application on your device.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-cross">✗</span>
+          <span><strong>We do not store message content</strong> — Messages sent via WhatsApp are never saved to MySellerDesk servers. Your conversations do not exist in our database.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-cross">✗</span>
+          <span><strong>We do not access your WhatsApp account</strong> — MySellerDesk has no API-level access to your WhatsApp. You remain in full control of what is sent and to whom.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 6 -->
+    <section class="policy-section" id="rights">
+      <div class="section-number">Section 06</div>
+      <h2 class="section-title"><span class="section-icon">⚖️</span> Your Rights</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">You have meaningful rights over your data. You can exercise any of these at any time by contacting us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="96e6e4ffe0f7f5efd6e5f3fafaf3e4f2f3e5fdb8fff8">[email&#160;protected]</a>.</p>
+
+      <div class="rights-grid">
+        <div class="right-card">
+          <div class="right-icon">👁️</div>
+          <div class="right-title">Right to Access</div>
+          <div class="right-text">You can request a full copy of all personal data we hold about you. We will respond within 7 business days.</div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">✏️</div>
+          <div class="right-title">Right to Rectification</div>
+          <div class="right-text">If any of your data is inaccurate, you can update it in Settings or ask us to correct it on your behalf.</div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🗑️</div>
+          <div class="right-title">Right to Erasure</div>
+          <div class="right-text">You can request permanent deletion of your account and all associated data. We complete this within 30 days, with no recovery possible.</div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">📦</div>
+          <div class="right-title">Right to Data Portability</div>
+          <div class="right-text">You can export your orders, customer records, and business data as a CSV or PDF at any time from within the app.</div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🚫</div>
+          <div class="right-title">Right to Object</div>
+          <div class="right-text">You can opt out of specific uses of your data, such as product communications. Contact us and we will honor your preference promptly.</div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">📞</div>
+          <div class="right-title">Right to Complain</div>
+          <div class="right-text">If you believe your privacy rights have been violated, contact us directly. We will acknowledge your complaint within 48 hours.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="policy-section" id="deletion">
+      <div class="section-number">Section 07</div>
+      <h2 class="section-title"><span class="section-icon">🗑️</span> Data Deletion</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">If you choose to close your account, here is exactly what happens — step by step.</p>
+
+      <ul class="promise-list">
+        <li class="promise-item">
+          <span class="promise-num">1</span>
+          <span>Go to <strong>Settings → Account → Delete Account</strong> in the app, or email us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbbbb9a2bdaaa8b28bb8aea7a7aeb9afaeb8a0e5a2a5">[email&#160;protected]</a></strong> with the subject line "Account Deletion Request."</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-num">2</span>
+          <span>We will send a <strong>confirmation email</strong> to verify the request is from you. Please confirm within 48 hours to proceed.</span>
+        </li>
+        <li class="promise-item">
+          <span class="promise-num">3</span>
+          <span>Within <strong>30 days</strong> of confirmation, all your personal data, order history, and customer records will be permanently and irreversibly deleted from our systems.</span>
+        </li>
+      </ul>
+
+      <div class="highlight-card caution">
+        <span class="highlight-emoji">📌</span>
+        <div>
+          <div class="highlight-title">Legal Retention Exception</div>
+          <div class="highlight-text">Applicable Indian law may require us to retain certain financial and transactional records — such as billing receipts — for a minimum period even after account deletion. Where this applies, we retain only the minimum data required by law and will clearly inform you of what is retained and for how long.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="policy-section" id="contact">
+      <div class="section-number">Section 08</div>
+      <h2 class="section-title"><span class="section-icon">📬</span> Contact Us</h2>
+      <div class="section-divider"></div>
+      <p class="policy-p">If you have any questions, concerns, or requests regarding this Privacy Policy or the way we handle your data, please reach out. We are committed to responding within 48 hours.</p>
+
+      <div class="highlight-card promise">
+        <span class="highlight-emoji">📧</span>
+        <div>
+          <div class="highlight-title">MySellerDesk Privacy Team</div>
+          <div class="highlight-text">
+            <strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7d7d5ced1c6c4dee7d4c2cbcbc2d5c3c2d4cc89cec9">[email&#160;protected]</a><br>
+            <strong>Subject line:</strong> Use "Privacy Request" for faster routing.<br><br>
+            MySellerDesk Technologies Pvt. Ltd.<br>
+            India &nbsp;·&nbsp; Response time: Within 48 hours
+          </div>
+        </div>
+      </div>
+
+      <p class="policy-p" style="margin-top:24px;">This Privacy Policy may be updated periodically to reflect changes in our practices or applicable law. We will notify you of any material changes via email before they take effect. The most current version will always be available on this page.</p>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand-name">My Seller<span>Desk</span></div>
+  <div class="footer-links">
+    <a class="footer-link" href="index.html#features">Features</a>
+    <a class="footer-link" href="index.html#pricing">Pricing</a>
+    <a class="footer-link" href="#">Privacy Policy</a>
+    <a class="footer-link" href="sellerdesk-terms.html">Terms of Use</a>
+    <a class="footer-link" href="sellerdesk-terms.html#refunds">Refund Policy</a>
+  </div>
+  <div class="footer-copy">© 2025 MySellerDesk · Made with ❤️ for Indian sellers</div>
+</footer>
+
+<script src="landing-page-config.js"></script>
+</body>
+</html>
