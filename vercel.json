@@ -1,5 +1,7 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/", "destination": "/landing-index.html" },
+    { "source": "/privacy", "destination": "/landing-page-privacy.html" },
+    { "source": "/terms", "destination": "/landing-page-terms.html" }
   ]
 }
