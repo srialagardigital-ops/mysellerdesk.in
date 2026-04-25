@@ -60,27 +60,40 @@ function switchTab(tab){
   if(err) err.style.display = 'none';
 }
 
-/* ── FIX 1: use window.SELLERDESK_CONFIG (was wrongly SD_CONFIG) ── */
+/* ── FIXED: Cookie-based storage so session works across subdomains ── */
 function getSupabaseClient(){
   const cfg = window.SELLERDESK_CONFIG || {};
   if(!cfg.SUPABASE_URL || !cfg.SUPABASE_ANON_KEY){
     console.error('MySellerDesk: SUPABASE_URL or SUPABASE_ANON_KEY missing in landing-page-config.js');
     return null;
   }
-  return window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, {
-  auth: {
-    storageKey: 'sd_supabase_auth',
-    storage: window.localStorage,
-    cookieOptions: {
-      domain: '.mysellerdesk.in',
-      sameSite: 'Lax',
-      secure: true
+
+  const cookieAdapter = {
+    getItem(key){
+      const match = document.cookie.split('; ').find(r => r.startsWith(key + '='));
+      return match ? decodeURIComponent(match.split('=').slice(1).join('=')) : null;
+    },
+    setItem(key, value){
+      const exp = new Date(Date.now() + 7*24*60*60*1000).toUTCString();
+      document.cookie = key+'='+encodeURIComponent(value)+'; Expires='+exp+'; Path=/; Domain=.mysellerdesk.in; SameSite=Lax; Secure';
+    },
+    removeItem(key){
+      document.cookie = key+'=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/; Domain=.mysellerdesk.in';
+      document.cookie = key+'=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/';
     }
-  }
-});
+  };
+
+  return window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, {
+    auth: {
+      storageKey: 'sd_supabase_auth',
+      storage: cookieAdapter,
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    }
+  });
 }
 
-/* ── FIX 2: set localStorage after login so dashboard auth bridge works ── */
 async function handleLogin(){
   const email = document.getElementById('login-email').value.trim();
   const pass  = document.getElementById('login-pass').value;
@@ -114,10 +127,6 @@ async function handleLogin(){
 
   const user = data.user;
 
-  /* set localStorage so dashboard bridge works */
-  localStorage.setItem('sd_logged_in', '1');
-  localStorage.setItem('sd_user_email', user.email || email);
-
   /* try to fetch shop_name from profiles */
   const { data: profile } = await client
     .from('profiles')
@@ -126,16 +135,12 @@ async function handleLogin(){
     .single();
 
   if(profile && profile.shop_name){
-    localStorage.setItem('sd_shop_name', profile.shop_name);
+    sessionStorage.setItem('sd_shop_name', profile.shop_name);
   }
 
-  if(profile && profile.plan){
-  localStorage.setItem('sd_plan', profile.plan);
-}
   window.location.href = getDashboardUrl({ auth:'1', email: user.email });
 }
 
-/* ── FIX 3: null user guard + email-confirmation handling ── */
 async function handleSignup(){
   const shop  = document.getElementById('signup-shop').value.trim();
   const email = document.getElementById('signup-email').value.trim();
@@ -170,7 +175,7 @@ async function handleSignup(){
 
   const user = data.user;
 
-  /* Supabase returns user=null when email confirmation is ON */
+  /* Supabase returns session=null when email confirmation is ON */
   if(!data.session){
     closeAuthModal();
     alert('\u2705 Account created! Please check your email to confirm your address, then log in.');
@@ -189,10 +194,7 @@ async function handleSignup(){
     console.warn('Profile insert error:', profileError.message);
   }
 
-  /* set localStorage */
-  localStorage.setItem('sd_logged_in', '1');
-  localStorage.setItem('sd_user_email', email);
-  localStorage.setItem('sd_shop_name', shop);
+  sessionStorage.setItem('sd_shop_name', shop);
 
   window.location.href = getDashboardUrl({ auth:'1', email, shop });
 }
