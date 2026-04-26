@@ -261,26 +261,31 @@ footer{background:var(--navy3);border-top:1px solid rgba(255,255,255,0.08);paddi
 .price-card{
   background:var(--surface);border:2px solid var(--border);
   border-radius:var(--radius);padding:28px;
-  transition:all 0.2s;
+  transition:all 0.2s;position:relative;
 }
-.price-card.featured{background:var(--navy);border-color:var(--blue);position:relative;}
-.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap;}
-.price-name{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
-.price-card.featured .price-name{color:rgba(255,255,255,0.5);}
+.price-card.featured{background:#fff;border-color:#f59e0b;border-width:2px;}
+.price-card.elite{background:#f8f5ff;border-color:#7c5cbf;border-width:2px;}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap;}
+.price-badge.elite-badge{background:linear-gradient(90deg,#7c5cbf,#9b6fe0);}
+.price-name{font-size:16px;font-weight:800;color:var(--text);margin-bottom:10px;}
+.price-card.elite .price-name{color:#7c5cbf;}
 .price-amount{font-family:'Cabinet Grotesk',sans-serif;font-size:38px;font-weight:900;color:var(--text);letter-spacing:-2px;margin-bottom:4px;}
-.price-card.featured .price-amount{color:#5ba0e8;}
-.price-period{font-size:12px;color:var(--muted);margin-bottom:20px;}
-.price-card.featured .price-period{color:rgba(255,255,255,0.4);}
+.price-card.featured .price-amount{color:var(--text);}
+.price-card.elite .price-amount{color:#7c5cbf;}
+.price-period{font-size:12px;color:var(--muted);margin-bottom:12px;}
+.price-save-badge{display:inline-block;background:linear-gradient(90deg,#7c5cbf,#9b6fe0);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;margin-bottom:16px;line-height:1.4;}
 .price-features{display:flex;flex-direction:column;gap:9px;margin-bottom:24px;}
 .price-feat{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text);}
-.price-card.featured .price-feat{color:rgba(255,255,255,0.75);}
+.price-cross{color:#e53e3e;flex-shrink:0;}
 .price-tick{color:var(--success);flex-shrink:0;}
-.price-card.featured .price-tick{color:#5ba0e8;}
-.btn-price{width:100%;padding:12px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.btn-price{display:block;width:100%;padding:13px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;text-align:center;text-decoration:none;}
 .btn-price-outline{background:transparent;color:var(--navy);border:2px solid var(--border);}
 .btn-price-outline:hover{border-color:var(--blue);color:var(--blue);}
-.btn-price-solid{background:var(--blue);color:#fff;border:none;}
-.btn-price-solid:hover{background:var(--blue2);}
+.btn-price-solid{background:linear-gradient(90deg,#f59e0b,#f97316);color:#fff;border:none;}
+.btn-price-solid:hover{opacity:0.9;}
+.btn-price-elite{background:linear-gradient(90deg,#7c5cbf,#9b6fe0);color:#fff;border:none;}
+.btn-price-elite:hover{opacity:0.9;}
+.btn-price-current{background:#f5f5f5;color:var(--muted);border:2px solid var(--border);cursor:default;}
 
 /* ── SECTION 5: CTA ── */
 .cta-section{
@@ -370,15 +375,7 @@ footer{background:var(--navy3);border-top:1px solid rgba(255,255,255,0.08);paddi
       <button class="btn-hero-sec" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">▶ See How It Works</button>
     </div>
 
-    <div class="hero-mock-strip">
-      <div class="mock-stat-mini"><div class="val">₹48,290</div><div class="lbl">This Month Revenue</div></div>
-      <div class="mock-divider"></div>
-      <div class="mock-stat-mini"><div class="val">124</div><div class="lbl">Orders Tracked</div></div>
-      <div class="mock-divider"></div>
-      <div class="mock-stat-mini"><div class="val">0</div><div class="lbl">Orders Lost</div></div>
-      <div class="mock-divider"></div>
-      <div class="mock-stat-mini"><div class="val">2 min</div><div class="lbl">Per Order Process Time</div></div>
-    </div>
+
   </div>
 </section>
 
@@ -508,47 +505,58 @@ footer{background:var(--navy3);border-top:1px solid rgba(255,255,255,0.08);paddi
       <p class="section-sub">Start free, upgrade when you're ready. No hidden charges.</p>
     </div>
     <div class="pricing-grid">
+      <!-- STARTER -->
       <div class="price-card">
-        <div class="price-name">Free Trial</div>
+        <div class="price-name">Starter</div>
+        <div style="display:inline-block;background:#e8f5ee;color:#1a8c5e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:12px;">30-day free trial</div>
         <div class="price-amount">₹0</div>
-        <div class="price-period">30 days free · no credit card</div>
+        <div class="price-period">/ 30 days</div>
         <div class="price-features">
-          <div class="price-feat"><span class="price-tick">✓</span> Unlimited orders for 30 days</div>
-          <div class="price-feat"><span class="price-tick">✓</span> Order management</div>
-          <div class="price-feat"><span class="price-tick">✓</span> Customer database</div>
-          <div class="price-feat"><span class="price-tick">✓</span> Basic bill generation</div>
-          <div class="price-feat" style="opacity:0.4;"><span>✗</span> Shipping labels</div>
-          <div class="price-feat" style="opacity:0.4;"><span>✗</span> PDF download</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Digital bill <span style="color:var(--muted);font-size:12px;">(with watermark)</span></div>
+          <div class="price-feat"><span class="price-tick">✓</span> WhatsApp messaging</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Customer &amp; product manage</div>
+          <div class="price-feat" style="opacity:0.4;"><span class="price-cross">✗</span> PDF download &amp; print</div>
+          <div class="price-feat" style="opacity:0.4;"><span class="price-cross">✗</span> A5 Shipping label + QR</div>
+          <div class="price-feat" style="opacity:0.4;"><span class="price-cross">✗</span> Unlimited orders</div>
         </div>
-        <a class="btn-price btn-price-outline" href="https://app.mysellerdesk.in">Start Free →</a>
+        <a class="btn-price btn-price-current">✓ Start Free</a>
+        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;">After 30 days, upgrade to continue</p>
       </div>
+
+      <!-- GROWTH -->
       <div class="price-card featured">
-        <div class="price-badge">Most Popular</div>
-        <div class="price-name">Pro</div>
+        <div class="price-badge">🔥 MOST POPULAR</div>
+        <div class="price-name">Growth</div>
         <div class="price-amount">₹199</div>
-        <div class="price-period">per month · cancel anytime</div>
+        <div class="price-period">/ month</div>
         <div class="price-features">
-          <div class="price-feat"><span class="price-tick">✓</span> <strong style="color:#fff;">Unlimited</strong> orders</div>
-          <div class="price-feat"><span class="price-tick">✓</span> A5 Shipping labels + QR</div>
-          <div class="price-feat"><span class="price-tick">✓</span> PDF download & print</div>
+          <div class="price-feat"><span class="price-tick">✓</span> <strong>Unlimited</strong> orders</div>
           <div class="price-feat"><span class="price-tick">✓</span> Bill — no watermark</div>
+          <div class="price-feat"><span class="price-tick">✓</span> PDF download &amp; print</div>
+          <div class="price-feat"><span class="price-tick">✓</span> A5 Shipping label + QR</div>
           <div class="price-feat"><span class="price-tick">✓</span> WhatsApp messaging</div>
           <div class="price-feat"><span class="price-tick">✓</span> Priority support</div>
         </div>
-        <a class="btn-price btn-price-solid" href="https://app.mysellerdesk.in">⚡ Start Pro →</a>
+        <a class="btn-price btn-price-solid" href="https://app.mysellerdesk.in">⚡ Upgrade to Growth — ₹199/mo →</a>
+        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;">Billed monthly · Cancel anytime</p>
       </div>
-      <div class="price-card">
-        <div class="price-name">Pro Plus</div>
+
+      <!-- ELITE -->
+      <div class="price-card elite">
+        <div class="price-badge elite-badge">👑 ELITE</div>
+        <div class="price-name">Elite</div>
         <div class="price-amount">₹1,999</div>
-        <div class="price-period">per year · save ₹389</div>
+        <div class="price-period">/ year</div>
+        <div class="price-save-badge">Save ₹389 vs monthly · Best value ₹167/mo</div>
         <div class="price-features">
-          <div class="price-feat"><span class="price-tick">✓</span> Everything in Pro</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Everything in Growth</div>
           <div class="price-feat"><span class="price-tick">✓</span> 1 full year access</div>
-          <div class="price-feat"><span class="price-tick">✓</span> Best value — ₹167/mo</div>
-          <div class="price-feat"><span class="price-tick">✓</span> VIP priority support</div>
-          <div class="price-feat"><span class="price-tick">✓</span> Early access to features</div>
+          <div class="price-feat"><span class="price-tick">✓</span> Unlimited orders &amp; labels</div>
+          <div class="price-feat"><span class="price-tick">✓</span> PDF &amp; print — no watermark</div>
+          <div class="price-feat"><span class="price-tick">✓</span> VIP support</div>
         </div>
-        <a class="btn-price btn-price-outline" href="https://app.mysellerdesk.in">👑 Get Pro Plus →</a>
+        <a class="btn-price btn-price-elite" href="https://app.mysellerdesk.in">👑 Get Elite — ₹1,999/yr →</a>
+        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;">One-time yearly payment · Best deal</p>
       </div>
     </div>
   </div>
