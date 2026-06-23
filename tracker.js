@@ -1,95 +1,118 @@
-/**
- * Landing Page Visitor Tracker
- * Add this script to your landing page <head> or before </body>
- * Replace ADMIN_PANEL_URL with your actual admin panel endpoint
- */
-
+/* ═══════════════════════════════════════════════
+   MySellerDesk — Landing Page Tracker
+   Sends visitor events → Supabase visitor_events
+═══════════════════════════════════════════════ */
 (function () {
-  const CONFIG = {
-    endpoint: "https://YOUR_ADMIN_PANEL_URL/api/track",
-    siteId: "landing-page",
+  const SUPA_URL = "https://zkafglojonspzlsfxcdh.supabase.co";
+  const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprYWZnbG9qb25zcHpsc2Z4Y2RoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MDc5NDAsImV4cCI6MjA5MTk4Mzk0MH0._fjfrv1G_n6jAUxqnCYRTNN-ferzfbydmy-bxOzWLIQ";
+  const HEADERS = {
+    "Content-Type": "application/json",
+    "apikey": SUPA_KEY,
+    "Authorization": "Bearer " + SUPA_KEY
   };
 
-  function getSessionId() {
-    let sid = sessionStorage.getItem("_sid");
-    if (!sid) {
-      sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
-      sessionStorage.setItem("_sid", sid);
-    }
-    return sid;
-  }
-
+  /* ── Visitor ID (persistent per browser) ── */
   function getVisitorId() {
-    let vid = localStorage.getItem("_vid");
+    let vid = localStorage.getItem("msd_vid");
     if (!vid) {
-      vid = Math.random().toString(36).slice(2) + Date.now().toString(36);
-      localStorage.setItem("_vid", vid);
+      vid = "v_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      localStorage.setItem("msd_vid", vid);
     }
     return vid;
   }
 
+  /* ── Session ID (per tab session) ── */
+  function getSessionId() {
+    let sid = sessionStorage.getItem("msd_sid");
+    if (!sid) {
+      sid = "s_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      sessionStorage.setItem("msd_sid", sid);
+    }
+    return sid;
+  }
+
+  /* ── Device type ── */
   function getDevice() {
     const ua = navigator.userAgent;
-    if (/tablet|ipad/i.test(ua)) return "Tablet";
-    if (/mobile|android|iphone/i.test(ua)) return "Mobile";
-    return "Desktop";
+    if (/tablet|ipad/i.test(ua)) return "tablet";
+    if (/mobile|android|iphone/i.test(ua)) return "mobile";
+    return "desktop";
   }
 
+  /* ── Traffic source ── */
   function getSource() {
     const ref = document.referrer;
-    if (!ref) return "Direct";
-    const url = new URL(ref);
-    const host = url.hostname.replace("www.", "");
-    if (/google|bing|yahoo|duckduckgo/i.test(host)) return "Search";
-    if (/facebook|instagram|twitter|linkedin|youtube/i.test(host)) return "Social";
-    return host;
+    if (!ref) return "direct";
+    if (/instagram/i.test(ref)) return "instagram";
+    if (/facebook|fb\./i.test(ref)) return "facebook";
+    if (/google/i.test(ref)) return "google";
+    if (/twitter|t\.co/i.test(ref)) return "twitter";
+    if (/whatsapp/i.test(ref)) return "whatsapp";
+    return new URL(ref).hostname;
   }
 
+  /* ── Country (via timezone fallback) ── */
   function getCountry() {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
+    } catch (e) {
+      return "Unknown";
+    }
   }
 
-  async function sendEvent(type, extra = {}) {
+  /* ── Send event to Supabase ── */
+  async function track(eventType, extra) {
     const payload = {
-      type,
-      siteId: CONFIG.siteId,
-      sessionId: getSessionId(),
-      visitorId: getVisitorId(),
+      event_type: eventType,
+      visitor_id: getVisitorId(),
+      session_id: getSessionId(),
       device: getDevice(),
       source: getSource(),
       country: getCountry(),
-      url: location.href,
-      referrer: document.referrer || "Direct",
-      timestamp: new Date().toISOString(),
-      ...extra,
+      page_url: window.location.href,
+      ...extra
     };
+
     try {
-      navigator.sendBeacon
-        ? navigator.sendBeacon(CONFIG.endpoint, JSON.stringify(payload))
-        : await fetch(CONFIG.endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-            keepalive: true,
-          });
-    } catch (e) {}
+      await fetch(`${SUPA_URL}/rest/v1/visitor_events`, {
+        method: "POST",
+        headers: { ...HEADERS, "Prefer": "return=minimal" },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      // Silent fail — don't break the page
+    }
   }
 
-  // Track page view
-  sendEvent("pageview");
+  /* ── 1. Page View ── */
+  track("pageview");
 
-  // Track conversion (call this manually: window.trackConversion())
-  window.trackConversion = function (label = "default") {
-    sendEvent("conversion", { conversionLabel: label });
-  };
-
-  // Track clicks on CTA buttons (add class="track-cta" to your buttons)
+  /* ── 2. Conversion — CTA button clicks ── */
   document.addEventListener("click", function (e) {
-    const btn = e.target.closest(".track-cta, [data-track]");
-    if (btn) {
-      sendEvent("conversion", {
-        conversionLabel: btn.dataset.track || btn.innerText || "cta-click",
-      });
+    const el = e.target.closest("a, button");
+    if (!el) return;
+
+    const href = el.getAttribute("href") || "";
+    const text = (el.textContent || "").trim().slice(0, 80);
+
+    // Any link to app.mysellerdesk.in = conversion
+    if (href.includes("app.mysellerdesk.in")) {
+      track("conversion", { label: text });
     }
   });
+
+  /* ── 3. Scroll depth (25%, 50%, 75%, 100%) ── */
+  const scrollMarks = new Set();
+  window.addEventListener("scroll", function () {
+    const pct = Math.round(
+      (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+    );
+    [25, 50, 75, 100].forEach(function (mark) {
+      if (pct >= mark && !scrollMarks.has(mark)) {
+        scrollMarks.add(mark);
+        track("scroll_depth", { label: mark + "%" });
+      }
+    });
+  }, { passive: true });
+
 })();
