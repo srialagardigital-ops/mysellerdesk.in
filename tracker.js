@@ -1,6 +1,8 @@
 /* ═══════════════════════════════════════════════
    MySellerDesk — Landing Page Tracker
-   Sends visitor events → Supabase visitor_events
+   - Sends pageview/conversion to visitor_events
+   - Heartbeat every 30s to active_sessions
+   - On unload: removes session (live count drops)
 ═══════════════════════════════════════════════ */
 (function () {
   const SUPA_URL = "https://zkafglojonspzlsfxcdh.supabase.co";
@@ -51,7 +53,7 @@
     return new URL(ref).hostname;
   }
 
-  /* ── Country (via timezone fallback) ── */
+  /* ── Country (via timezone) ── */
   function getCountry() {
     try {
       return Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
@@ -60,48 +62,95 @@
     }
   }
 
-  /* ── Send event to Supabase ── */
+  const SESSION_ID  = getSessionId();
+  const VISITOR_ID  = getVisitorId();
+  const DEVICE      = getDevice();
+  const SOURCE      = getSource();
+  const COUNTRY     = getCountry();
+
+  /* ── Send event to visitor_events ── */
   async function track(eventType, extra) {
     const payload = {
       event_type: eventType,
-      visitor_id: getVisitorId(),
-      session_id: getSessionId(),
-      device: getDevice(),
-      source: getSource(),
-      country: getCountry(),
+      visitor_id: VISITOR_ID,
+      session_id: SESSION_ID,
+      device: DEVICE,
+      source: SOURCE,
+      country: COUNTRY,
       page_url: window.location.href,
       ...extra
     };
-
     try {
       await fetch(`${SUPA_URL}/rest/v1/visitor_events`, {
         method: "POST",
         headers: { ...HEADERS, "Prefer": "return=minimal" },
         body: JSON.stringify(payload)
       });
-    } catch (e) {
-      // Silent fail — don't break the page
-    }
+    } catch (e) {}
   }
 
-  /* ── 1. Page View ── */
+  /* ── Upsert to active_sessions (heartbeat) ── */
+  async function heartbeat() {
+    const payload = {
+      session_id: SESSION_ID,
+      visitor_id: VISITOR_ID,
+      device: DEVICE,
+      source: SOURCE,
+      country: COUNTRY,
+      page_url: window.location.href,
+      last_seen: new Date().toISOString()
+    };
+    try {
+      await fetch(`${SUPA_URL}/rest/v1/active_sessions`, {
+        method: "POST",
+        headers: { ...HEADERS, "Prefer": "resolution=merge-duplicates,return=minimal" },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
+  }
+
+  /* ── Remove session on tab close ── */
+  function removeSession() {
+    const url = `${SUPA_URL}/rest/v1/active_sessions?session_id=eq.${SESSION_ID}`;
+    // Use sendBeacon for reliability on unload
+    const blob = new Blob([], { type: "application/json" });
+    navigator.sendBeacon(
+      url + "&_method=DELETE",
+      blob
+    );
+    // Fallback fetch (sync-ish)
+    try {
+      fetch(url, { method: "DELETE", headers: HEADERS, keepalive: true });
+    } catch (e) {}
+  }
+
+  /* ── 1. Page View + first heartbeat ── */
   track("pageview");
+  heartbeat();
 
-  /* ── 2. Conversion — CTA button clicks ── */
-  document.addEventListener("click", function (e) {
-    const el = e.target.closest("a, button");
-    if (!el) return;
+  /* ── 2. Heartbeat every 30 seconds ── */
+  setInterval(heartbeat, 30000);
 
-    const href = el.getAttribute("href") || "";
-    const text = (el.textContent || "").trim().slice(0, 80);
-
-    // Any link to app.mysellerdesk.in = conversion
-    if (href.includes("app.mysellerdesk.in")) {
-      track("conversion", { label: text });
+  /* ── 3. Remove on close/navigate away ── */
+  window.addEventListener("beforeunload", removeSession);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      removeSession();
     }
   });
 
-  /* ── 3. Scroll depth (25%, 50%, 75%, 100%) ── */
+  /* ── 4. Conversion — CTA button clicks ── */
+  document.addEventListener("click", function (e) {
+    const el = e.target.closest("a, button");
+    if (!el) return;
+    const href = el.getAttribute("href") || "";
+    const text = (el.textContent || "").trim().slice(0, 80);
+    if (href.includes("app.mysellerdesk.in")) {
+      track("conversion", { conversion_label: text });
+    }
+  });
+
+  /* ── 5. Scroll depth ── */
   const scrollMarks = new Set();
   window.addEventListener("scroll", function () {
     const pct = Math.round(
@@ -110,7 +159,7 @@
     [25, 50, 75, 100].forEach(function (mark) {
       if (pct >= mark && !scrollMarks.has(mark)) {
         scrollMarks.add(mark);
-        track("scroll_depth", { label: mark + "%" });
+        track("scroll_depth", { conversion_label: mark + "%" });
       }
     });
   }, { passive: true });
